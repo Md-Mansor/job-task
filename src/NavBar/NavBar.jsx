@@ -1,7 +1,21 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Auth/AuthProvider";
 
 
 const NavBar = () => {
+    const { signOut, user } = useContext(AuthContext);
+
+    const handelSignOut = () => {
+        signOut()
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+    console.log(user);
     return (
         <div className="">
             <div className="drawer">
@@ -14,21 +28,36 @@ const NavBar = () => {
                             </label>
                         </div>
                         <div className="btn btn-wide">
-                            <NavLink to='/'>TO DO </NavLink >
+                            <Link to="/about">TO DO </Link >
                         </div>
                         <div className="hidden text-2xl font-bold lg:block">
                             <NavLink to='/' className="px-12">Home</NavLink>
                             <NavLink to='/about'>About</NavLink>
                         </div>
                         <div className="">
-                            <div className="avatar">
-                                <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                                </div>
-                            </div>
-                            <div>
-                                <Link to='signIn'>Sign In</Link>
-                            </div>
+                            {
+                                user ? (
+                                    <div>
+                                        <div className="dropdown dropdown-end">
+                                            <label tabIndex={0} className="">
+                                                <div className="flex flex-col-reverse items-center cursor-pointer gap-1 border-2 rounded-full ">
+                                                    {/* <p className="textarea-sm font-semibold">{user?.displayName}</p> */}
+                                                    <img src={user?.photoURL} alt="" className="rounded-full w-12 h-12" />
+                                                </div>
+                                            </label>
+                                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                                                <div className="flex flex-col gap-2">
+                                                    <button className="btn btn-outline btn-info" onClick={handelSignOut}>Log Out</button>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                ) :
+                                    <div>
+                                        <Link to='/login'>Sign In</Link>
+                                    </div>
+                            }
                         </div>
                     </div>
                 </div>
