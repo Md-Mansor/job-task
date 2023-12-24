@@ -3,11 +3,12 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Auth/AuthProvider";
 
 
-const NavBar = () => {
-    const { signOut, user } = useContext(AuthContext);
 
-    const handelSignOut = () => {
-        signOut()
+const NavBar = () => {
+    const { logOut, user } = useContext(AuthContext);
+
+    const handelLogout = () => {
+        logOut()
             .then(data => {
                 console.log(data);
             })
@@ -15,7 +16,9 @@ const NavBar = () => {
                 console.log(error);
             })
     }
+
     console.log(user);
+
     return (
         <div className="">
             <div className="drawer">
@@ -42,19 +45,28 @@ const NavBar = () => {
                                             <label tabIndex={0} className="">
                                                 <div className="flex flex-col-reverse items-center cursor-pointer gap-1 border-2 rounded-full ">
                                                     {/* <p className="textarea-sm font-semibold">{user?.displayName}</p> */}
-                                                    <img src={user?.photoURL} alt="" className="rounded-full w-12 h-12" />
+                                                    <img src={user?.photoURL} alt="User" className="rounded-full w-12 h-12" />
                                                 </div>
                                             </label>
                                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                                <div className="flex flex-col gap-2">
-                                                    <button className="btn btn-outline btn-info" onClick={handelSignOut}>Log Out</button>
+                                                <div className=" font-semibold gap-2">
+                                                    <div>
+                                                        <a className="text-lg">{user?.displayName}</a>
+                                                    </div>
+                                                    <div>
+                                                        <Link to="/dashboard" className=" btn w-full my-2 btn-outline btn-info"><span>
+                                                        </span>Dashboard</Link>
+                                                    </div>
+                                                    <div>
+                                                        <button className="btn btn-outline w-full btn-info" onClick={handelLogout}>Log Out</button>
+                                                    </div>
                                                 </div>
                                             </ul>
                                         </div>
                                     </div>
 
                                 ) :
-                                    <div>
+                                    <div className="text-xl btn btn-outline">
                                         <Link to='/login'>Sign In</Link>
                                     </div>
                             }

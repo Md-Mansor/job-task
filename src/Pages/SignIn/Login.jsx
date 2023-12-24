@@ -4,14 +4,15 @@ import { useContext } from "react";
 import { AuthContext } from "../../Auth/AuthProvider";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from "../../Firebase/Firebase.config";
-
+import image from '../../Asset/login.jpg'
 
 
 const Login = () => {
-    const { signIn } = useContext(AuthContext);
+    const { logIn } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider()
 
     const auth = getAuth(app)
+
     const handelGoogleLogin = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
@@ -23,14 +24,14 @@ const Login = () => {
             })
     }
 
-    const handelSignUp = event => {
+    const handelSignUp = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
 
-        signIn(email, password)
+        logIn(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
@@ -40,11 +41,11 @@ const Login = () => {
             })
     }
     return (
-        <div className="lg:flex justify-center items-center h-screen bg-teal-400 ">
-            <div>
-                {/* <img src={image} alt="" /> */}
+        <div className="lg:flex gap-5 justify-center items-center h-screen bg-teal-400 ">
+            <div className="lg:w-1/3">
+                <img src={image} alt="" className="rounded" />
             </div>
-            <div className="lg:w-1/3 text-center py-5  glass border-4 rounded-md p-5">
+            <div className="lg:w-1/4  text-center py-5 glass border-4 rounded-md p-5">
                 <h1 className="font-semibold text-3xl">Log In Now</h1>
                 <form onSubmit={handelSignUp} className="">
                     <div className="form-control">

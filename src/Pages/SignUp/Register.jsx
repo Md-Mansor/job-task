@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Auth/AuthProvider";
 import image from "../../Asset/6521996.png"
-import { Link } from "react-router-dom";
+
 
 
 const Register = () => {
@@ -65,7 +65,6 @@ const Register = () => {
                     <p>{success}</p>
                     <p>{registerError}</p>
                 </form>
-                <Link to="/login" className="text-2xl font-medium"><h1>Login</h1></Link>
             </div>
         </div>
     );
