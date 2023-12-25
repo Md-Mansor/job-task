@@ -21,7 +21,7 @@ const CreateTask = () => {
         const date = form.deadline.value
         const newTask = { title, description, date, selectedValue, email: user ? user.email : '' }
         console.log(newTask);
-        axios.post('http://localhost:5000/task', newTask)
+        axios.post('https://job-task-server-ashen.vercel.app/task', newTask)
             .then(data => {
                 console.log(data.data);
             })

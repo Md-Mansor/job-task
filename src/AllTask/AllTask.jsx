@@ -5,7 +5,7 @@ const AllTask = () => {
 
     useEffect(() => {
 
-        const url = 'http://localhost:5000/task'
+        const url = 'https://job-task-server-ashen.vercel.app/task'
         fetch(url)
             .then(res => res.json())
             .then(data => {
