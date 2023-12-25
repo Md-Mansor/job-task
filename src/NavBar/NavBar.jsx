@@ -54,7 +54,7 @@ const NavBar = () => {
                                                         <a className="text-lg">{user?.displayName}</a>
                                                     </div>
                                                     <div>
-                                                        <Link to="/dashboard" className=" btn w-full my-2 btn-outline btn-info"><span>
+                                                        <Link to="/dashboard/profile" className=" btn w-full my-2 btn-outline btn-info"><span>
                                                         </span>Dashboard</Link>
                                                     </div>
                                                     <div>
