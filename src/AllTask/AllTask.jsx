@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 const AllTask = () => {
@@ -6,11 +7,16 @@ const AllTask = () => {
     useEffect(() => {
 
         const url = 'https://job-task-server-ashen.vercel.app/task'
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                setAllTask(data)
+        axios.get(url)
+            .then(res => {
+                setAllTask(res.data);
             })
+
+        // fetch(url)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         setAllTask(data)
+        //     })
     }, []);
 
     return (
